@@ -1,8 +1,44 @@
+# version: 0.0
+# os: linux
+# files:
+#   - source: /index.html
+#     destination: /var/www/html/
+# hooks:
+#   BeforeInstall:
+#     - location: scripts/install_dependencies
+#       timeout: 300
+#       runas: root
+#     - location: scripts/start_server
+#       timeout: 300
+#       runas: root
+#   ApplicationStop:
+#     - location: scripts/stop_server
+#       timeout: 300
+#       runas: root
 version: 0.0
 os: linux
 files:
+  # Deploy all HTML files and assets to the Apache web root directory
   - source: /index.html
     destination: /var/www/html/
+  - source: /login.html
+    destination: /var/www/html/
+  - source: /forgotpassword.html
+    destination: /var/www/html/
+  - source: /sportspage.html
+    destination: /var/www/html/
+  - source: /Register.html
+    destination: /var/www/html/
+  - source: /admin.html
+    destination: /var/www/html/
+  - source: /results.html
+    destination: /var/www/html/
+  - source: /search_result.html
+    destination: /var/www/html/
+  # Assuming your assets (images, CSS, JS) need to be copied too
+  - source: /assets/
+    destination: /var/www/html/assets/
+
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies
@@ -13,6 +49,10 @@ hooks:
       runas: root
   ApplicationStop:
     - location: scripts/stop_server
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server
       timeout: 300
       runas: root
 
